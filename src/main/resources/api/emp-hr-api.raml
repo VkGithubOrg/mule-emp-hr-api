@@ -1,0 +1,45 @@
+#%RAML 1.0
+title: emp-hr-api
+description: Employee Hr APi for managing employee records
+version: 1.0.0
+baseUri: http://{environment}/emp-hr-api/v1
+baseUriParameters:
+  environment:
+    description: dev, test, uat, prod
+    enum:
+      - thbs-dev-emp-hr-api.us.e2.cloudhub.io
+      - thbs-test-emp-hr-api.us.e2.cloudhub.io
+      - thbs-uat-emp-hr-api.us.e2.cloudhub.io
+      - thbs-emp-hr-api.us.e2.cloudhub.io
+securitySchemes:
+  oauth2-schema: !include /exchange_modules/e3d1d9c0-8ecb-41d6-bd4b-6d980a61d1e1/oauth20/1.0.0/oauth20.raml
+securedBy: [oauth2-schema]
+traits:
+  transaction-header: !include /exchange_modules/e3d1d9c0-8ecb-41d6-bd4b-6d980a61d1e1/transaction-header/1.0.0/transaction-header.raml
+uses:
+  ehat: datatypes/emp-hr-api-types.raml
+/create-employee:
+  post:
+    description: Create employee to HR system
+    is:
+      - transaction-header  
+    body:
+      application/json:
+        type: ehat.CreateEmployeeRequestType
+        example: !include examples/create-employee-request.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: ehat.CreateEmployeeResponseType
+            example: !include examples/create-employee-response.json
+      400:
+        body:
+          application/json:
+            type: ehat.BadRequestReponseType
+            example: !include examples/bad-request.json
+      500:
+        body:
+          application/json:
+            type: ehat.InternalServerErrorResponseType
+            example: !include examples/internal-server-error.json

@@ -1,0 +1,116 @@
+#%RAML 1.0 Library
+usage: emp hr api data types
+types:
+  CreateEmployeeRequestType:
+    description: create employee request payload type
+    type: object
+    properties:
+      empId:
+        type: number
+        description: employee id
+        required: true
+        example: 14364
+      empName:
+        type: string
+        description: employee name
+        example: "vinod"
+        required: true
+      empAddress:
+        type: string
+        description: employee address
+        example: "bangalore"
+      empStatus:
+        type: string
+        description: employee status
+        example: "A"
+        enum:
+          - A
+          - I
+  CreateEmployeeResponseType:
+    description: Create employee response
+    type: object
+    properties:
+      code:
+        description: HTTP response code
+        required: true
+        type: number
+        example: 201
+      message:
+        description: HTTP response message
+        required: true
+        type: string
+        example: "Created"
+      description:
+        description: Reponse message description
+        required: false
+        type: string
+        example: "Employee record created in HR system"
+      datetime:
+        description: date time of the event happened
+        required: true
+        type: datetime
+        example: "2023-04-26T16:25:00Z"
+      transactionId:
+        description: Unique transaction id
+        required: true
+        type: string
+        example: "16e17d0c-33d4-4620-99b6-d66784b9975g"
+  BadRequestReponseType:
+    description: Bad Request response
+    type: object
+    properties:
+      code:
+        description: HTTP response code
+        required: true
+        type: number
+        example: 400
+      message:
+        description: HTTP response message
+        required: true
+        type: string
+        example: "Bad Request"
+      description:
+        description: Reponse message description
+        required: false
+        type: string
+        example: "Invalid input payload"
+      datetime:
+        description: date time of the event happened
+        required: true
+        type: datetime
+        example: "2023-04-26T16:25:00Z"
+      transactionId:
+        description: Unique transaction id
+        required: true
+        type: string
+        example: "16e17d0c-33d4-4620-99b6-d66784b9975p"
+  InternalServerErrorResponseType:
+    description: Internal Server Error
+    type: object
+    properties:
+      code:
+        description: HTTP response code
+        required: true
+        type: number
+        example: 500
+      message:
+        description: HTTP response message
+        required: true
+        type: string
+        example: "Internal Server Error"
+      description:
+        description: Reponse message description
+        required: false
+        type: string
+        example: "The server error encountered"
+      datetime:
+        description: date time of the event happened
+        required: true
+        type: datetime
+        example: "2023-04-26T16:25:00Z"
+      transactionId:
+        description: Unique transaction id
+        required: true
+        type: string
+        example: "16e17d0c-33d4-4620-99b6-d66784b9975j" 
+          
